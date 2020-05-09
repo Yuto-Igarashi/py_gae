@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+
+<body>
+    これはtestページです
+    {{msg}}
+   
+    <div class="sec_memo">
+        
+        <h2>メモの内容</h2>
+        <!---->
+        {% if user_memo == None %}]
+       
+        {% endif %}
+       
+        <div class="memo_form">
+          <form action="/add_memo" method="POST">
+              <input type="text" name="memo_text">
+              
+              <input type="hidden" name="user_id" value="{{user_id}}">
+              <input type="submit" value="送信">
+          </form>
+        </div>
+       
+    </div>
+    <ul class="memo__list">
+
+        {% for item in user_memo %} 
+        <li  class="memo__list-item">
+            <div><span>ID : </span>{{item['user_id']}}</div>
+            <div><span>内容 : </span>{{item['memo_text']}}</div>
+            <div><span>作成した日付 : </span> {{item['timestamp']}} </div>
+        </li>
+        {% endfor %} 
+
+    </ul>
+
+</body>
+</html>

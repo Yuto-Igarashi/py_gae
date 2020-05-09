@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<style>
+
+    .memo__list .memo__list-item:first-child{
+        border-top: 1px solid #ccc;
+    }
+    .memo__list .memo__list-item{
+        padding: 20px 0;
+        border-bottom: 1px solid #ccc;
+    }
+    .memo__list .memo__list-item span{
+        font-weight: bold;
+        font-size: 20px;
+        padding-right:10px ;
+    }
+</style>
+<body>
+<p>text</p>
+{% for item in book %}
+<p> {{item['title']}}</p>
+{% endfor %} 
+</body>
+</html>

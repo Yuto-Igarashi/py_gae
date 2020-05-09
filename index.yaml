@@ -1,0 +1,13 @@
+indexes:
+- kind: user_memo
+  properties:
+  - name: memo_text
+  - name: user_id
+  - name: timestamp
+    direction: desc
+
+- kind: visit
+  ancestor: yes
+  properties:
+  - name: timestamp
+    direction: desc

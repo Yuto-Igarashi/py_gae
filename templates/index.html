@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datastore and Firebase Auth Exsample</title>
+    <script src="{{ url_for('static',filename='script.js') }}"></script>
+    <script src="{{ url_for('static',filename='const.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}" type="text/css">
+<!-- MOCK SNIPPET: DO NOT COPY -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+
+    <script>
+      var config = {
+        apiKey:apiKey,
+        projectId:projectId
+      };
+      firebase.initializeApp(config);
+    </script>  
+<script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+</head>
+<body>
+    <h1>Datastore and Firebase Auth Example</h1>
+
+    <div id="firebaseui-auth-container"></div>
+
+    <button id="sign-out" hidden=true>Sign Out</button>
+
+    <div id="login-info" hidden=true>
+      <h2>Login info:</h2>
+      {% if user_data %}      <dl>
+          <dt>Name</dt><dd>{{ user_data['name'] }}</dd>
+          <dt>Email</dt><dd>{{ user_data['email'] }}</dd>
+          <dt>Last 10 visits</dt><dd>
+        {% for time in times %}              <p>{{ time['timestamp'] }}</p>
+            {% endfor %} </dd>
+        </dl>
+      {% elif error_message %}        <p>Error: {{ error_message }}</p>
+      </div>
+         {% endif %}  
+      <div class="sec_memo">
+          <h2>メモの内容</h2>
+          <!---->
+          <ul class="memo__list">
+            {% if user_memo %}
+            {% for item in user_memo %} 
+            <li  class="memo__list-item">
+                <div><span>ID : </span>{{item['user_id']}}</div>
+                <div><span>内容 : </span>{{item['memo_text']}}</div>
+                <div><span>作成した日付 : </span> {{item['timestamp']}} </div>
+            </li>
+            {% endfor %} 
+            {% endif %} 
+        </ul>
+          <div class="memo_form">
+            <h2>メモを追加する</h2>
+            <form action="/add_memo" method="POST">
+                <input type="text" name="memo_text">
+                <input type="hidden" name="user_id" value="{{user_data['user_id']}}">
+                <input type="submit" value="送信">
+            </form>
+          </div>
+      </div>
+      
+</body>
+</html>
